@@ -19,7 +19,6 @@ public class ClusterHealthReporter {
         agent.reportMetric("V1/ClusterHealth/Status/IsYellow", "bool", asInt(ClusterHealthService.isYellow(ClusterHealth)));
         agent.reportMetric("V1/ClusterHealth/Status/IsRed", "bool", asInt(ClusterHealthService.isRed(ClusterHealth)));
 
-        // Component/V1/ClusterHealth/Indices/Docs/*
         agent.reportMetric("V1/ClusterHealth/Shards/Count/Initializing", "shards", ClusterHealth.initializing_shards);
         agent.reportMetric("V1/ClusterHealth/Shards/Count/Primary Active", "shards", ClusterHealth.active_primary_shards);
         agent.reportMetric("V1/ClusterHealth/Shards/Count/Active", "shards", ClusterHealth.active_shards);
