@@ -5,10 +5,10 @@ import com.newrelic.metrics.publish.util.Logger;
 import me.snov.newrelic.elasticsearch.interfaces.AgentInterface;
 import me.snov.newrelic.elasticsearch.parsers.ClusterHealthParser;
 import me.snov.newrelic.elasticsearch.parsers.ClusterStatsParser;
-import me.snov.newrelic.elasticsearch.parsers.NodeStatsParser;
+import me.snov.newrelic.elasticsearch.parsers.NodesStatsParser;
 import me.snov.newrelic.elasticsearch.reporters.ClusterHealthReporter;
 import me.snov.newrelic.elasticsearch.reporters.ClusterStatsReporter;
-import me.snov.newrelic.elasticsearch.reporters.NodeStatsReporter;
+import me.snov.newrelic.elasticsearch.reporters.NodesStatsReporter;
 
 import java.io.IOException;
 
