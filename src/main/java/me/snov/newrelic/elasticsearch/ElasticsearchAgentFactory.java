@@ -5,10 +5,10 @@ import com.newrelic.metrics.publish.AgentFactory;
 import com.newrelic.metrics.publish.configuration.ConfigurationException;
 import me.snov.newrelic.elasticsearch.parsers.ClusterHealthParser;
 import me.snov.newrelic.elasticsearch.parsers.ClusterStatsParser;
-import me.snov.newrelic.elasticsearch.parsers.NodeStatsParser;
+import me.snov.newrelic.elasticsearch.parsers.NodesStatsParser;
 import me.snov.newrelic.elasticsearch.reporters.ClusterHealthReporter;
 import me.snov.newrelic.elasticsearch.reporters.ClusterStatsReporter;
-import me.snov.newrelic.elasticsearch.reporters.NodeStatsReporter;
+import me.snov.newrelic.elasticsearch.reporters.NodesStatsReporter;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
