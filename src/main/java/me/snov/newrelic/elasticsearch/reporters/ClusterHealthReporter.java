@@ -7,11 +7,11 @@ import me.snov.newrelic.elasticsearch.services.ClusterHealthService;
 public class ClusterHealthReporter {
 
     private final AgentInterface agent;
-    private final ClusterHealthService ClusterHealthService;
+    private final ClusterHealthService clusterHealthService;
 
     public ClusterHealthReporter(AgentInterface agent) {
         this.agent = agent;
-        this.ClusterHealthService = new ClusterHealthService();
+        this.clusterHealthService = new ClusterHealthService();
     }
 
     public void reportClusterHealth(ClusterHealth ClusterHealth) {
