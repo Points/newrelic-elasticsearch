@@ -13,49 +13,49 @@ import java.io.IOException;
  */
 public class ElasticsearchAgent extends Agent implements AgentInterface {
 
-	private static final String GUID = "me.snov.newrelic-elasticsearch";
-	private static final String VERSION = "2.3.0";
+    private static final String GUID = "me.snov.newrelic-elasticsearch";
+    private static final String VERSION = "2.3.0";
 
-	private final String clusterName;
-	private final Logger logger;
+    private final String clusterName;
+    private final Logger logger;
 
-	private ClusterStatsParser clusterStatsParser;
-	private ClusterStatsReporter clusterStatsReporter;
-	private ClusterHealthParser clusterHealthParser;
-	private ClusterHealthReporter clusterHealthReporter;
-	private NodesStatsParser nodesStatsParser;
-	private NodesStatsReporter nodesStatsReporter;
+    private ClusterStatsParser clusterStatsParser;
+    private ClusterStatsReporter clusterStatsReporter;
+    private ClusterHealthParser clusterHealthParser;
+    private ClusterHealthReporter clusterHealthReporter;
+    private NodesStatsParser nodesStatsParser;
+    private NodesStatsReporter nodesStatsReporter;
 
-	public ElasticsearchAgent(String clusterName) {
-		super(GUID, VERSION);
-		this.clusterName = clusterName;
-		this.logger = Logger.getLogger(ElasticsearchAgent.class);
-	}
+    public ElasticsearchAgent(String clusterName) {
+        super(GUID, VERSION);
+        this.clusterName = clusterName;
+        this.logger = Logger.getLogger(ElasticsearchAgent.class);
+    }
 
-	@Override
-	public String getAgentName() {
-		return clusterName;
-	}
+    @Override
+    public String getAgentName() {
+        return clusterName;
+    }
 
-	@Override
-	public void pollCycle() {
-		try {
-			clusterStatsReporter.reportClusterStats(clusterStatsParser.request());
-			clusterHealthReporter.reportClusterHealth(clusterHealthParser.request());
-			nodesStatsReporter.reportNodesStats(nodesStatsParser.request());
-		} catch (IOException e) {
-			logger.error("Unable to perform poll cycle", e);
-		}
-	}
+    @Override
+    public void pollCycle() {
+        try {
+            clusterStatsReporter.reportClusterStats(clusterStatsParser.request());
+            clusterHealthReporter.reportClusterHealth(clusterHealthParser.request());
+            nodesStatsReporter.reportNodesStats(nodesStatsParser.request());
+        } catch (IOException e) {
+            logger.error("Unable to perform poll cycle", e);
+        }
+    }
 
-	public void configure(ClusterStatsParser clusterStatsParser, ClusterStatsReporter clusterStatsReporter,
-			NodesStatsParser nodesStatsParser, NodesStatsReporter nodesStatsReporter,
-			ClusterHealthParser clusterHealthParser, ClusterHealthReporter clusterHealthReporter) {
-		this.clusterStatsParser = clusterStatsParser;
-		this.clusterStatsReporter = clusterStatsReporter;
-		this.clusterHealthParser = clusterHealthParser;
-		this.clusterHealthReporter = clusterHealthReporter;
-		this.nodesStatsParser = nodesStatsParser;
-		this.nodesStatsReporter = nodesStatsReporter;
-	}
+    public void configure(ClusterStatsParser clusterStatsParser, ClusterStatsReporter clusterStatsReporter,
+            NodesStatsParser nodesStatsParser, NodesStatsReporter nodesStatsReporter,
+            ClusterHealthParser clusterHealthParser, ClusterHealthReporter clusterHealthReporter) {
+        this.clusterStatsParser = clusterStatsParser;
+        this.clusterStatsReporter = clusterStatsReporter;
+        this.clusterHealthParser = clusterHealthParser;
+        this.clusterHealthReporter = clusterHealthReporter;
+        this.nodesStatsParser = nodesStatsParser;
+        this.nodesStatsReporter = nodesStatsReporter;
+    }
 }

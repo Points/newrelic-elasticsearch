@@ -38,6 +38,6 @@ public class ClusterHealthReporter {
     }
 
     private int asInt(boolean value) {
-        return value ? 1 : 0;
-    }
+		return value ? 1 : 0;
+	}
 }
