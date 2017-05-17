@@ -16,8 +16,8 @@ public class ClusterHealthReporter {
 
     public void reportClusterHealth(ClusterHealth ClusterHealth) {
         // Cluster status (we represent unhealthy states as an int to allow alerting on values > 0)
-        agent.reportMetric("V1/ClusterHealth/Status/IsYellow", "bool", asInt(ClusterHealthService.isYellow(ClusterHealth)));
-        agent.reportMetric("V1/ClusterHealth/Status/IsRed", "bool", asInt(ClusterHealthService.isRed(ClusterHealth)));
+        agent.reportMetric("V1/ClusterHealth/Status/IsYellow", "bool", asInt(clusterHealthService.isYellow(ClusterHealth)));
+        agent.reportMetric("V1/ClusterHealth/Status/IsRed", "bool", asInt(clusterHealthService.isRed(ClusterHealth)));
 
         agent.reportMetric("V1/ClusterHealth/Shards/Count/Initializing", "shards", ClusterHealth.initializing_shards);
         agent.reportMetric("V1/ClusterHealth/Shards/Count/Primary Active", "shards", ClusterHealth.active_primary_shards);
