@@ -3,8 +3,12 @@ package me.snov.newrelic.elasticsearch;
 import com.newrelic.metrics.publish.Agent;
 import com.newrelic.metrics.publish.AgentFactory;
 import com.newrelic.metrics.publish.configuration.ConfigurationException;
-import me.snov.newrelic.elasticsearch.parsers.*;
-import me.snov.newrelic.elasticsearch.reporters.*;
+import me.snov.newrelic.elasticsearch.parsers.ClusterHealthParser;
+import me.snov.newrelic.elasticsearch.parsers.ClusterStatsParser;
+import me.snov.newrelic.elasticsearch.parsers.NodeStatsParser;
+import me.snov.newrelic.elasticsearch.reporters.ClusterHealthReporter;
+import me.snov.newrelic.elasticsearch.reporters.ClusterStatsReporter;
+import me.snov.newrelic.elasticsearch.reporters.NodeStatsReporter;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
