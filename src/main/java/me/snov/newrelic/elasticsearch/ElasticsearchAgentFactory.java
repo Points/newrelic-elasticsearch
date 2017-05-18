@@ -3,8 +3,10 @@ package me.snov.newrelic.elasticsearch;
 import com.newrelic.metrics.publish.Agent;
 import com.newrelic.metrics.publish.AgentFactory;
 import com.newrelic.metrics.publish.configuration.ConfigurationException;
+import me.snov.newrelic.elasticsearch.parsers.ClusterHealthParser;
 import me.snov.newrelic.elasticsearch.parsers.ClusterStatsParser;
 import me.snov.newrelic.elasticsearch.parsers.NodesStatsParser;
+import me.snov.newrelic.elasticsearch.reporters.ClusterHealthReporter;
 import me.snov.newrelic.elasticsearch.reporters.ClusterStatsReporter;
 import me.snov.newrelic.elasticsearch.reporters.NodesStatsReporter;
 
@@ -25,7 +27,8 @@ public class ElasticsearchAgentFactory extends AgentFactory {
         String name = (String) properties.get("name");
 
         if (host == null || port == null) {
-            throw new ConfigurationException("'host' and 'port' must be specified. Do you have a 'config/plugin.json' file?");
+            throw new ConfigurationException(
+                    "'host' and 'port' must be specified. Do you have a 'config/plugin.json' file?");
         }
 
         if (protocol == null) {
@@ -42,13 +45,17 @@ public class ElasticsearchAgentFactory extends AgentFactory {
 
         try {
             ClusterStatsParser clusterStatsParser = new ClusterStatsParser(protocol, host, port.intValue(), basePath, username, password);
-            String clusterName = name != null && name.length() > 0  ? name  : clusterStatsParser.request().cluster_name;
+            String clusterName = name != null && name.length() > 0 ? name : clusterStatsParser.request().cluster_name;
             ElasticsearchAgent agent = new ElasticsearchAgent(clusterName);
 
             ClusterStatsReporter clusterStatsReporter = new ClusterStatsReporter(agent);
             NodesStatsParser nodeStatsParser = new NodesStatsParser(protocol, host, port.intValue(), basePath, username, password);
             NodesStatsReporter nodeStatsReporter = new NodesStatsReporter(agent);
-            agent.configure(clusterStatsParser, clusterStatsReporter, nodeStatsParser, nodeStatsReporter);
+
+            ClusterHealthParser clusterHealthParser = new ClusterHealthParser(protocol, host, port.intValue(), basePath, username, password);
+            ClusterHealthReporter clusterHealthReporter = new ClusterHealthReporter(agent);
+
+            agent.configure(clusterStatsParser, clusterStatsReporter, nodeStatsParser, nodeStatsReporter, clusterHealthParser, clusterHealthReporter);
 
             return agent;
         } catch (MalformedURLException e) {
